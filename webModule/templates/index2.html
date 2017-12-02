@@ -1,0 +1,84 @@
+<html lang="en">
+  <head>
+    <title>Rajasthan Hackathopn 3.0</title>
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+  </head>
+  <body> 
+    <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+        
+  <div class="demo-ribbon">
+        
+        <img class="myclass"  src="{{ url_for('static', filename='images/hackathon-logo_to3nmb.webp') }}" /></div>    
+      
+        <main class="demo-main mdl-layout__content">
+        <div class="demo-container mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+          <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+          <div>
+              <h2 align="center">TechQuad</h2>
+              <center><p><div id="p1" class="mdl-progress mdl-js-progress"></div>
+              <hr>
+             <p><div id="p2" class="mdl-progress mdl-js-progress"></div>
+              <br>
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Project Title #Hackathon</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                 Rajasthan Hackathon 3.0 Project Summary
+
+<p><span id=result>?</span><p>
+  <a href=# id=calculate>Show Network</a>
+              </div>
+
+              <div class="mdl-card__menu">
+              </div>
+            </div>
+            </div>
+              </div>
+        </div>
+
+      </main>
+    </div>
+  </body>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script>
+      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      console.log($SCRIPT_ROOT);
+      $(function() {
+        $('a#calculate').bind('click', function() {
+          $.getJSON($SCRIPT_ROOT + '/update', {
+          }, function(data) {
+         
+            $("#result").text(data.result);
+            console.log(data.result[0])
+         
+            document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
+              this.MaterialProgress.setProgress(22);
+            });
+
+            document.querySelector('#p2').addEventListener('mdl-componentupgraded', function() {
+              this.MaterialProgress.setProgress(66);
+            });
+         
+          });
+          return false;
+        });
+
+      });
+
+
+      document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
+        this.MaterialProgress.setProgress(33);
+      });
+      document.querySelector('#p2').addEventListener('mdl-componentupgraded', function() {
+        this.MaterialProgress.setProgress(66);
+      });
+    </script>
+</html>
+3/

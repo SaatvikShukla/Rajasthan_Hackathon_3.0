@@ -1,11 +1,11 @@
 #include <SoftwareSerial.h>
 char bt;
 SoftwareSerial EEBlue(0,1); // RX | TX
-int outPin1 = 5;     //motor1 
-int outPin2 = 4;    //motor1 
-int outPin3 = 3;   //motor2 
-int outPin4 = 2;   //motor2 
-int SPEED = 60;
+int outPin1 = 13;     //motor1 
+int outPin2 = 12;    //motor1 
+int outPin3 = 11;   //motor2 
+int outPin4 = 10;   //motor2 
+int SPEED = 20
 
 void setup()
 {
@@ -15,7 +15,7 @@ void setup()
   pinMode(outPin4,OUTPUT); 
 
   Serial.begin(9600);
-  EEBlue.begin(9600);  //Default Baud for comm
+  EEBlue.begin(9600);  //Default Baud for comm, it may be different for your Module. 
   Serial.println("The bluetooth gates are open.\n Connect to HC-05 from any other bluetooth device with 1234 as pairing key!.");
  
 }
@@ -41,6 +41,7 @@ void loop()
       analogWrite(outPin2,0); 
       analogWrite(outPin3,SPEED); 
       analogWrite(outPin4,0); 
+      delay(1000);
     } 
     else if (bt == '1')       //move backwards 
     {Serial.print("Inside B\n"); 

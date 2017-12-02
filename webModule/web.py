@@ -11,25 +11,36 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello(name=None):
-    return render_template('index.html', name=name)
+    return render_template('index2.html')
 
 @app.route('/update')
-def add_numbers():
+def update():
 	try:
-		status, res = commands.getstatusoutput("iw wlp2s0 scan | grep 'abc' -B 4 -A 5 | egrep 'SSID|signal|last seen'")
-		print(status)
-		print(res)
+		
+		status, res = commands.getstatusoutput("iw wlp2s0 scan | grep 'Ayush' -B 3 | sed -n '1p;4p'")
+		# status, res = commands.getstatusoutput("iwlist wlp2s0 scanning | grep 'RONAK' -B 3 -A 3 | egrep 'ESSID|Quality'")
+		# status, res = commands.getstatusoutput("iw wlp2s0 scan | grep 'RONAK' -B 4 -A 5 | egrep 'SSID|signal|last seen'")
 	except Exception as e:
 		raise e
+		res = 'Error Scanning networks.'
 		print("Exception."+e)
 
 	if status == 0:
-		print "Scanning success."
-	elif status == 1:
-		res=None
-		print("Error while scanning")
+		try:
+			alpha = res.split('\n\t')
+			alpha[1] = (alpha[1].strip());
+			alpha[0] = alpha[0].replace("\tsignal: -","")
+			alpha[0] = alpha[0].replace(".00 dBm","")
+			alpha[1] = alpha[1].replace("SSID: ","")
+		except Exception as e:
+			print("Exception."+e)
+			alpha = 'Error parsing scanned networks.'
+			raise e
 
-	return jsonify(result=res)
+	print(alpha)
+	print(status)
+	# print(res)
+	return jsonify(result=alpha)
 
 
 if __name__ == "__main__":
