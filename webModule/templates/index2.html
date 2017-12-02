@@ -1,14 +1,14 @@
 <html lang="en">
   <head>
     <title>Rajasthan Hackathopn 3.0</title>
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"> -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   </head>
   <body> 
-<div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+    <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
       <div class="demo-ribbon"></div>
       <main class="demo-main mdl-layout__content">
         <div class="demo-container mdl-grid">
@@ -17,90 +17,80 @@
             <div class="demo-crumbs mdl-color-text--grey-500">
               Tech Quad &gt; Control Center
             </div>
-            <h3>WiFi Control Center</h3>
-                
-                <!-- <span id=result>?</span> --><p>-<span id="networkStrength">??</span>dBm<br>
-
-                Scanning for <span id="networkName">??</span>
-                <br>
-                <a href=# id=calculate>Show Network</a>
-              </p>
+              <center>
+                <h3>WiFi Control Center</h3>
+                <h4>
+                  <p>-<span id="networkStrength">??</span>dBm<br>
+                  Scanning for <span id="networkName">??</span>
+                  <br>
+                  <a href=# id=calculate>Show Network</a>
+                  </p>
+                </h4>
+              </center>
               <hr>
-
               <div class="demo-card-square mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title mdl-card--expand">
                   <h2 class="mdl-card__title-text" id="mainHeadText">
                     ...
                   </h2>
                 </div>
-<!--                 <div class="mdl-card__supporting-text" id="mainHeadSupportingText">
-                  ...
-                </div> -->
               </div>
-
           </div>
         </div>
       </main>
     </div>
   </body>
-    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script>
-      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-      var strength = 0;
-      console.log($SCRIPT_ROOT);
-      var refInterval = window.setInterval('updater()', 3000);
-      $(function updater() {
-        // $('a#calculate').bind('click', function() {
-          $.getJSON($SCRIPT_ROOT + '/update', {
-          }, function(data) {
-         
-            $("#result").text(data.result);
-            $("#networkStrength").text(data.result[0]);
-            $("#networkName").text(data.result[1]);
-            $("#progressWrapper").show();
-            strength = (data.result[0]);
-            strenghener();
-            setTimeout(update, 3000);
+  <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script>
+    var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    var strength = 0;
+    console.log($SCRIPT_ROOT);
+    function updater() {
+        $.getJSON($SCRIPT_ROOT + '/update', {
+        }, function(data) {
+       
+          $("#result").text(data.result);
+          $("#networkStrength").text(data.result[1]);
+          $("#networkName").text(data.result[2]);
+          $("#progressWrapper").show();
+          strength = (data.result[1]);
+          strenghener();
+          setTimeout(update, 2000);
 
-          });
-          return false;
-        // });
+        });
+        return false;
+    }
 
-      });
-      function strenghener() {
-        // strength = 45;
-        if (strength < 25) { // Less than 25. Not possible. Nullify
-          
-          $('#mainHeadText').text('.....');
-          $('.demo-ribbon').css('background-color','#00FF00')
-          $('.demo-card-square > .mdl-card__title').css('background','#00FF00')
+    function strenghener() {
+      if (strength < 25) { // Less than 25. Not possible. Nullify
+        
+        $('#mainHeadText').text('.....');
+        $('.demo-ribbon').css('background-color','#00FF00')
+        $('.demo-card-square > .mdl-card__title').css('background','#00FF00')
 
-        } else if (strength>65) { //could be a vehicle
+      } else if (strength>60) { //could be a vehicle
 
-          $('#mainHeadText').text('Possible vehicle in vicinity.');
-          $('.demo-ribbon').css('background-color','#00FFCD')
-          $('.demo-card-square > .mdl-card__title').css('background','#00FFCD')
-        
-        } else if (strength<=65 && strength >=40) { // a vehicle is nearby
-        
-          $('#mainHeadText').text('Vehicle coming close');
-          $('.demo-ribbon').css('background-color','#FF0A00')
-          $('.demo-card-square > .mdl-card__title').css('background','#FF0A00')
-        
-        } else if (strength <40) { //
-        
-          $('#mainHeadText').text('.Beware,divert immediately.');
-          $('.demo-ribbon').css('background-color','#FF0000')
-          $('.demo-card-square > .mdl-card__title').css('background','#FF0000')
-        }
+        $('#mainHeadText').text('Possible vehicle in vicinity.');
+        $('.demo-ribbon').css('background-color','#00FFCD')
+        $('.demo-card-square > .mdl-card__title').css('background','#00FFCD')
+      
+      } else if (strength<=60 && strength >=43) { // a vehicle is nearby
+      
+        $('#mainHeadText').text('Vehicle coming close');
+        $('.demo-ribbon').css('background-color','#FF0A00')
+        $('.demo-card-square > .mdl-card__title').css('background','#FF0A00')
+      
+      } else if (strength <43) { //
+      
+        $('#mainHeadText').text('.Beware,divert immediately.');
+        $('.demo-ribbon').css('background-color','#FF0000')
+        $('.demo-card-square > .mdl-card__title').css('background','#FF0000')
       }
-    </script>
-    <script>
-      $( document ).ready(function() {
-        // while(true){
-          // $('a#calculate').delay(3000).trigger( "click" );
-        // }
-      });
-    </script>
+    }
+    $( document ).ready(function() {
+      var refInterval = window.setInterval('updater()', 2000);
+        $('a#calculate').trigger( "click" );
+    });
+  </script>
 
 </html>
