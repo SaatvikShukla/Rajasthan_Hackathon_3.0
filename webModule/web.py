@@ -17,7 +17,7 @@ def hello(name=None):
 def update():
 	try:
 		
-		status, res = commands.getstatusoutput("iw wlp2s0 scan | grep 'Ayush' -B 3 | sed -n '1p;4p'")
+		status, res = commands.getstatusoutput("iw wlp2s0 scan | grep 'black34' -B 3 | sed -n '1p;4p'")
 		# status, res = commands.getstatusoutput("iwlist wlp2s0 scanning | grep 'RONAK' -B 3 -A 3 | egrep 'ESSID|Quality'")
 		# status, res = commands.getstatusoutput("iw wlp2s0 scan | grep 'RONAK' -B 4 -A 5 | egrep 'SSID|signal|last seen'")
 	except Exception as e:
@@ -36,7 +36,25 @@ def update():
 			print("Exception."+e)
 			alpha = 'Error parsing scanned networks.'
 			raise e
+	else:
+		alpha = 'Error parsing scanned networks.'
 
+	# if (alpha[0] >= 80):
+	# 	alpha.append("<style>.demo-ribbon{background-color:#518946} .demo-card-square.mdl-card {display:block} .demo-card-square > .mdl-card__title {background:url('') bottom right 15% no-repeat #518946;}</style>")
+	# 	alpha.append("Everything seems clear")
+	# 	alpha.append("It seems to be clear around you, keep driving.")
+	# elif (alpha[0] < 80 and alpha[0] > 60): ###
+	# 	alpha.append("<style>.demo-ribbon{background-color:#E4553D} .demo-card-square.mdl-card {display:block} .demo-card-square > .mdl-card__title {background:url('') bottom right 15% no-repeat #E4553D;}</style>")
+	# 	alpha.append("A car is closeby")
+	# 	alpha.append("There is a car nearby.")
+	# elif (alpha[0] < 60 and alpha > 45):
+	# 	alpha.append("<style>.demo-ribbon{background-color:#C44335} .demo-card-square.mdl-card {display:block} .demo-card-square > .mdl-card__title {background:url('') bottom right 15% no-repeat #C44335;}</style>")
+	# 	alpha.append("Vehicle Alert")
+	# 	alpha.append("A vehicle is close to you, beware.")		
+	# elif (alpha[0] <= 45 ):
+	# 	alpha.append("<style>.demo-ribbon{background-color:#C44335} .demo-card-square.mdl-card {display:block} .demo-card-square > .mdl-card__title {background:url('') bottom right 15% no-repeat #C44335;}</style>")
+	# 	alpha.append("Vehicle Alert")
+	# 	alpha.append("A vehicle is close to you, beware.")
 	print(alpha)
 	print(status)
 	# print(res)

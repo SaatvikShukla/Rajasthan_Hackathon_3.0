@@ -14,7 +14,7 @@ void setup() {
 }
 void loop() {
   // rotates the servo motor from 15 to 165 degrees
-  for(int i=15;i<=165;i++){  
+  for(int i=30;i<=150;i++){  
   myServo.write(i);
   delay(30);
   distance = calculateDistance();
@@ -25,7 +25,7 @@ void loop() {
   //Serial.print("."); // Sends addition character right next to the previous value needed later in the Processing IDE for indexing
   }
   // Repeats the previous lines from 165 to 15 degrees
-  for(int i=165;i>15;i--){  
+  for(int i=150;i>30;i--){  
   myServo.write(i);
   delay(30);
   distance = calculateDistance();

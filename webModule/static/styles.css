@@ -50,23 +50,12 @@
   font-size: 13px;
 }
 
-.demo-card-wide.mdl-card {
-  width: inherit;
-  text-decoration-color: black;
-    background-image: url(images/culture.jpg);
-    background-repeat:no-repeat;
-    width: inherit;
-    background-size: cover;
-    
+.demo-card-square.mdl-card {
+  width: 100%;
+  height: 60px;
 }
-.demo-card-wide > .mdl-card__title {
-  color: white;
-font-style: italic;
-    font-family: fantasy;
-  height: 100px;
-    width: inherit;
-  background: url('../assets/demos/welcome_card.jpg') center / cover;
-}
-.demo-card-wide > .mdl-card__menu {
+.demo-card-square > .mdl-card__title {
   color: #fff;
+  background:
+    url('') bottom right 15% no-repeat #46B6AC;
 }
